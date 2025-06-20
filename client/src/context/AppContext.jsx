@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { jobsData } from "../assets/assets";
 
 export const AppContext = createContext();
 
@@ -7,7 +8,27 @@ export const AppContextProvider = (props) => {
 
   const [isSearched, setIsSearched] = useState(false);
 
-  const value = { searchFilter, setSearchFilter, isSearched, setIsSearched };
+  const [jobs, setJobs] = useState([]);
+
+  // Function to fetch jobs data
+  const fetchJobs = async () => {
+    // Later when we create backend we will fetch data from our API
+    setJobs(jobsData);
+  };
+
+  // Fetch jobs whenever client loads the site
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  const value = {
+    searchFilter,
+    setSearchFilter,
+    isSearched,
+    setIsSearched,
+    jobs,
+    setJobs,
+  };
 
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
