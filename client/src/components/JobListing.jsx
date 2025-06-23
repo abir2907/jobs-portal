@@ -8,6 +8,7 @@ const JobListing = () => {
     useContext(AppContext);
 
   const [showFilter, setShowFilter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <div className="container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8">
@@ -91,10 +92,52 @@ const JobListing = () => {
         <p className="mb-8">Get your desired job from top companies</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {/* JOB CARDS */}
-          {jobs.map((job, index) => (
-            <JobCard key={index} job={job} />
-          ))}
+          {jobs
+            .slice((currentPage - 1) * 6, currentPage * 6)
+            .map((job, index) => (
+              <JobCard key={index} job={job} />
+            ))}
         </div>
+
+        {/* Pagination */}
+        {jobs.length > 0 && (
+          <div className="flex items-center justify-center space-x-2 mt-10">
+            <a href="#job-list">
+              <img
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                src={assets.left_arrow_icon}
+                alt="left_arrow"
+              />
+            </a>
+            {Array.from({ length: Math.ceil(jobs.length / 6) }).map(
+              (_, index) => (
+                <a href="#job-list">
+                  <button
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded cursor-pointer ${
+                      currentPage === index + 1
+                        ? "bg-blue-100 text-blue-500"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                </a>
+              )
+            )}
+            <a href="#job-list">
+              <img
+                onClick={() =>
+                  setCurrentPage(
+                    Math.min(Math.ceil(jobs.length / 6), currentPage + 1)
+                  )
+                }
+                src={assets.right_arrow_icon}
+                alt="left_arrow"
+              />
+            </a>
+          </div>
+        )}
       </section>
     </div>
   );
