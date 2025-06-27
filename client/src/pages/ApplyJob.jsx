@@ -79,6 +79,7 @@ const ApplyJob = () => {
             <div className="w-full lg:w-2/3">
               <h2 className="font-bold text-2xl mb-4">Job Description</h2>
               <div
+                className="rich-text"
                 dangerouslySetInnerHTML={{ __html: JobData.description }}
               ></div>
               <button className="bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer mt-10">
