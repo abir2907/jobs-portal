@@ -67,7 +67,9 @@ const ApplyJob = () => {
               <button className="bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer">
                 Apply Now
               </button>
-              <p className="">Posted {moment(JobData.date).fromNow()}</p>
+              <p className="mt-1 text-gray-600">
+                Posted {moment(JobData.date).fromNow()}
+              </p>
             </div>
           </div>
         </div>
