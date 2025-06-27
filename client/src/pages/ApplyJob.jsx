@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import JobCard from "../components/JobCard";
 import kConvert from "k-convert";
 import moment from "moment";
+import Footer from "../components/Footer";
 
 const ApplyJob = () => {
   const { id } = useParams();
@@ -102,6 +103,7 @@ const ApplyJob = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   ) : (
     <Loading />
