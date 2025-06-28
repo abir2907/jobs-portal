@@ -19,17 +19,19 @@ const RecruiterLogin = () => {
         </h1>
         <p className="text-sm">Welcome back! Please sign in to continue</p>
         <>
-          <div className="border px-4 py-2 flex items-center gap-2 rounded-full mt-5">
-            <img src={assets.person_icon} alt="person icon" />
-            <input
-              className="outline-none text-sm"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              type="text"
-              placeholder="Company Name"
-              required
-            />
-          </div>
+          {state !== "Login" && (
+            <div className="border px-4 py-2 flex items-center gap-2 rounded-full mt-5">
+              <img src={assets.person_icon} alt="person icon" />
+              <input
+                className="outline-none text-sm"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                type="text"
+                placeholder="Company Name"
+                required
+              />
+            </div>
+          )}
 
           <div className="border px-4 py-2 flex items-center gap-2 rounded-full mt-5">
             <img src={assets.email_icon} alt="email icon" />
