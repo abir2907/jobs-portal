@@ -30,7 +30,18 @@ const RecruiterLogin = () => {
         </h1>
         <p className="text-sm">Welcome back! Please sign in to continue</p>
         {state === "Sign Up" && isTextDataSubmitted ? (
-          <>{/* User can submit company logo */}</>
+          <>
+            <div>
+              <label htmlFor="image">
+                <img src={assets.upload_area} alt="upload icon" />
+                <input type="file" id="image" hidden />
+              </label>
+              <p>
+                Upload Company <br />
+                logo
+              </p>
+            </div>
+          </>
         ) : (
           <>
             {state !== "Login" && (
@@ -79,7 +90,7 @@ const RecruiterLogin = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 w-full text-white py-2 rounded-full"
+          className="bg-blue-600 w-full text-white py-2 rounded-full cursor-pointer"
         >
           {state === "Login"
             ? "login"
