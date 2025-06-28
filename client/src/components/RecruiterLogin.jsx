@@ -33,8 +33,16 @@ const RecruiterLogin = () => {
           <>
             <div>
               <label htmlFor="image">
-                <img src={assets.upload_area} alt="upload icon" />
-                <input type="file" id="image" hidden />
+                <img
+                  src={image ? URL.createObjectURL(image) : assets.upload_area}
+                  alt="upload icon"
+                />
+                <input
+                  onChange={(e) => setImage(e.target.files[0])}
+                  type="file"
+                  id="image"
+                  hidden
+                />
               </label>
               <p>
                 Upload Company <br />
