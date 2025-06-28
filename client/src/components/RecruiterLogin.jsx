@@ -31,9 +31,10 @@ const RecruiterLogin = () => {
         <p className="text-sm">Welcome back! Please sign in to continue</p>
         {state === "Sign Up" && isTextDataSubmitted ? (
           <>
-            <div>
+            <div className="flex items-center gap-4 my-10">
               <label htmlFor="image">
                 <img
+                  className="w-16 rounded-full"
                   src={image ? URL.createObjectURL(image) : assets.upload_area}
                   alt="upload icon"
                 />
