@@ -67,14 +67,24 @@ const RecruiterLogin = () => {
         </button>
 
         {state === "Login" ? (
-          <p>
+          <p className="mt-5 text-center">
             Don't have an account?{" "}
-            <span onClick={() => setState("Sign Up")}>Sign Up</span>
+            <span
+              className="text-blue-600 cursor-pointer"
+              onClick={() => setState("Sign Up")}
+            >
+              Sign Up
+            </span>
           </p>
         ) : (
-          <p>
+          <p className="mt-5 text-center">
             Already have an account?{" "}
-            <span onClick={() => setState("Login")}>Login</span>
+            <span
+              className="text-blue-600 cursor-pointer"
+              onClick={() => setState("Login")}
+            >
+              Login
+            </span>
           </p>
         )}
       </form>
