@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
 
 const RecruiterLogin = () => {
   const [state, setState] = useState("Login");
@@ -10,6 +11,8 @@ const RecruiterLogin = () => {
   const [image, setImage] = useState(false);
 
   const [isTextDataSubmitted, setIsTextDataSubmitted] = useState(false);
+
+  const { setShowRecruiterLogin } = useContext(AppContext);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -131,6 +134,13 @@ const RecruiterLogin = () => {
             </span>
           </p>
         )}
+
+        <img
+          onClick={() => setShowRecruiterLogin(false)}
+          className="absolute top-5 right-5 cursor-pointer"
+          src={assets.cross_icon}
+          alt="cross icon"
+        />
       </form>
     </div>
   );
