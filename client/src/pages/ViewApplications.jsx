@@ -38,6 +38,7 @@ const ViewApplications = () => {
                 <td className="py-2 px-4 border-b">
                   <a
                     href=""
+                    target="_blank"
                     className="bg-blue-50 text-blue-400 px-3 py-1 rounded inline-flex gap-2 items-center"
                   >
                     Resume{" "}
