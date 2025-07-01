@@ -71,6 +71,17 @@ const AddJob = () => {
           </select>
         </div>
       </div>
+
+      <div>
+        <p>Job Salary</p>
+        <input
+          onChange={(e) => setSalary(e.target.value)}
+          type="Number"
+          placeholder="2500"
+        />
+      </div>
+
+      <button>ADD</button>
     </form>
   );
 };
