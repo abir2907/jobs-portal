@@ -1,9 +1,13 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
+import connectDB from "./config/db.js";
 
 // Initialize Express
 const app = express();
+
+// Connect to databse
+await connectDB();
 
 // Middlewares
 app.use(cors());
