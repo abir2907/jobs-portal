@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RecruiterLogin = () => {
+  const navigate = useNavigate();
+
   const [state, setState] = useState("Login");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -12,13 +16,37 @@ const RecruiterLogin = () => {
 
   const [isTextDataSubmitted, setIsTextDataSubmitted] = useState(false);
 
-  const { setShowRecruiterLogin } = useContext(AppContext);
+  const { setShowRecruiterLogin, backendUrl, setCompanyToken, setCompanyData } =
+    useContext(AppContext);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     if (state === "Sign Up" && !isTextDataSubmitted) {
       setIsTextDataSubmitted(true);
+    }
+
+    try {
+      if (state === "Login") {
+        const { data } = await axios.post(backendUrl + "/api/company/login", {
+          email,
+          password,
+        });
+
+        if (data.success) {
+          console.log(data);
+          setCompanyData(data.company);
+          setCompanyToken(data.token);
+
+          // Store token in local storage so it stays when user reloads
+          localStorage.setItem("companyToken", data.token);
+
+          setShowRecruiterLogin(false);
+          navigate("/dashboard");
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
