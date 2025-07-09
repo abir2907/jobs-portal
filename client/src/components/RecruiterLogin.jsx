@@ -3,6 +3,7 @@ import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RecruiterLogin = () => {
   const navigate = useNavigate();
@@ -43,6 +44,8 @@ const RecruiterLogin = () => {
 
           setShowRecruiterLogin(false);
           navigate("/dashboard");
+        } else {
+          toast.error(data.message);
         }
       }
     } catch (error) {
