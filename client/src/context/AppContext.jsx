@@ -27,6 +27,12 @@ export const AppContextProvider = (props) => {
   // Fetch jobs whenever client loads the site
   useEffect(() => {
     fetchJobs();
+
+    const storedCompanyToken = localStorage.getItem("companyToken");
+
+    if (storedCompanyToken) {
+      setCompanyToken(storedCompanyToken);
+    }
   }, []);
 
   const value = {
