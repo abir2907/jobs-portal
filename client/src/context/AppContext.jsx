@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { jobsData } from "../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -22,8 +21,18 @@ export const AppContextProvider = (props) => {
 
   // Function to fetch jobs data
   const fetchJobs = async () => {
-    // Later when we create backend we will fetch data from our API
-    setJobs(jobsData);
+    try {
+      const { data } = await axios.get(backendUrl + "/api/jobs");
+
+      if (data.success) {
+        setJobs(data.jobs);
+        console.log(data.jobs);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   // Function to fetch company data
