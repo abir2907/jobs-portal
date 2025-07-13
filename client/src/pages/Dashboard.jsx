@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -16,6 +17,13 @@ const Dashboard = () => {
     setCompanyData(null);
     navigate("/");
   };
+
+  // Display ManageJobs page by default on opening dashboard
+  useEffect(() => {
+    if (companyData) {
+      navigate("/dashboard/manage-jobs");
+    }
+  }, [companyData]);
 
   return (
     <div className="min-h-screen">
