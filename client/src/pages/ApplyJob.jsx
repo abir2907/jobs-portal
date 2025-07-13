@@ -10,9 +10,12 @@ import moment from "moment";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAuth } from "@clerk/clerk-react";
 
 const ApplyJob = () => {
   const navigate = useNavigate();
+
+  const { getToken } = useAuth();
 
   const { id } = useParams();
   const [JobData, setJobData] = useState(null);
@@ -43,6 +46,20 @@ const ApplyJob = () => {
       if (!userData.resume) {
         navigate("/applications");
         return toast.error("Upload resume to apply");
+      }
+
+      const token = await getToken();
+
+      const { data } = await axios.post(
+        backendUrl + "/api/users/apply",
+        { jobId: JobData._id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
       toast.error(error.message);
