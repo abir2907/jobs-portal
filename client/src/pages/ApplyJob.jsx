@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
@@ -12,9 +12,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const ApplyJob = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const [JobData, setJobData] = useState(null);
-  const { jobs, backendUrl } = useContext(AppContext);
+  const { jobs, backendUrl, userData, userApplications } =
+    useContext(AppContext);
 
   const fetchJob = async () => {
     try {
@@ -25,6 +28,21 @@ const ApplyJob = () => {
         console.log(data.job);
       } else {
         toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const applyHandler = async () => {
+    try {
+      if (!userData) {
+        return toast.error("Login to apply for jobs");
+      }
+
+      if (!userData.resume) {
+        navigate("/applications");
+        return toast.error("Upload resume to apply");
       }
     } catch (error) {
       toast.error(error.message);
@@ -74,7 +92,10 @@ const ApplyJob = () => {
             </div>
 
             <div className="flex flex-col justify-center text-end text-sm max-md:mx-auto max-md:text-center">
-              <button className="bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer">
+              <button
+                className="bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer"
+                onClick={applyHandler}
+              >
                 Apply Now
               </button>
               <p className="mt-1 text-gray-600">
@@ -90,7 +111,10 @@ const ApplyJob = () => {
                 className="rich-text"
                 dangerouslySetInnerHTML={{ __html: JobData.description }}
               ></div>
-              <button className="bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer mt-10">
+              <button
+                className="bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer mt-10"
+                onClick={applyHandler}
+              >
                 Apply Now
               </button>
             </div>
