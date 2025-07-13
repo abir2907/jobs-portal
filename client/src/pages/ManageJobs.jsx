@@ -11,7 +11,7 @@ import { useEffect } from "react";
 const ManageJobs = () => {
   const navigate = useNavigate();
 
-  const [jobs, setJobs] = useState(false);
+  const [jobs, setJobs] = useState([]);
 
   const { backendUrl, companyToken } = useContext(AppContext);
 
