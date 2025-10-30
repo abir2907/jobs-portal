@@ -167,8 +167,8 @@ VITE_BACKEND_URL=http://localhost:5000
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/job-portal.git
-   cd job-portal
+   git clone git@github.com:abir2907/jobs-portal.git
+   cd jobs-portal
    ```
 
 2. **Install server dependencies**
